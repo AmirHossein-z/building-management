@@ -14,12 +14,11 @@
                     <h5 class="card-title text-center pb-0 fs-4">وارد حساب خود شوید</h5>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" method="POST" action="<?php echo URL ?>auth/loggedIn">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">ایمیل</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="email" name="email" class="form-control" id="email" required>
                         <div class="invalid-feedback">لطفا ایمیل خود را وارد کنید</div>
                       </div>
@@ -31,11 +30,22 @@
                       <div class="invalid-feedback">لطفا پسورد خود را وارد کنید</div>
                     </div>
 
+                  <div class="col-sm-10">
+                    <div class="form-check form-check-inline form-check-reverse">
+                      <label class="form-check-label" for="role-member">عضو ساختمان</label>
+                      <input class="form-check-input" type="radio" name="role" id="role-member" value="role-member" checked>
+                    </div>
+                    <div class="form-check form-check-inline form-check-reverse ">
+                      <label class="form-check-label" for="role-manager">مدیر</label>
+                      <input class="form-check-input" type="radio" name="role" id="role-manager" value="role-manager">
+                    </div>
+                  </div>
+
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">ورود</button>
                     </div>
-                    <div class="col-12">
-                    <p class="small mb-0">حساب ندارید؟<a href="<?php echo URL.'auth/register' ?>">ساخت حساب کاربری</a></p>
+                    <div class="col-12 text-center">
+                    <p class="small mb-0">حساب ندارید؟<a class="text-decoration-underline" href="<?php echo URL.'auth/register' ?>">ساخت حساب کاربری</a></p>
                     </div>
                   </form>
 

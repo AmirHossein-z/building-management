@@ -13,8 +13,36 @@
   scroll-behavior: smooth;
 }
 
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('Vazirmatn-Regular.woff2') format('woff2'),
+        url('Vazirmatn-Regular.woff') format('woff'),
+        url('Vazirmatn-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lalezar';
+    src: url('../fonts/Lalezar-Regular.woff2') format('woff2'),
+        url('../fonts/Lalezar-Regular.woff') format('woff'),
+        url('../fonts/Lalezar-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+html * {
+  font-family: "Vazirmatn", sans-serif !important;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Lalezar", sans-serif !important;
+}
+
 body {
-  font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
   color: #444444;
 }

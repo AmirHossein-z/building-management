@@ -17,9 +17,9 @@ class Router
             ],
             'loggedIn' => [
                 'type' => 'POST',
-                'pattern_url' => '/^\/auth\/login_user$/',
+                'pattern_url' => '/^\/auth\/loggedIn$/',
                 'controller' => 'authController',
-                'action' => 'login_user',
+                'action' => 'loggedIn',
                 // 'middleware' => ['personPolicy:is_login:dashboard/index'],
             ],
             'logout' => [
@@ -37,11 +37,18 @@ class Router
             ],
             'registered' => [
                 'type' => "POST",
-                'pattern_url' => '/^\/auth\/register_user$/',
+                'pattern_url' => '/^\/auth\/registered$/',
                 'controller' => 'authController',
-                'action' => 'register_user',
+                'action' => 'registered',
                 // 'middleware' => ['personPolicy:is_login:dashboard/index'],
             ],
+            'dashboardIndex' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/index$/',
+                'controller' => 'dashboardController',
+                'action' => 'index',
+                // 'middleware' => ['personPolicy:is_login:dashboard/index'],
+            ]
         ];
 
         $page_found = false;

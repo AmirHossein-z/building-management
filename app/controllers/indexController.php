@@ -9,9 +9,9 @@ class indexController extends Controller
 
     public function main()
     {
-        $this->header('header');
+        // $this->header('header');
         $this->view('main');
-        $this->header('footer');
+        // $this->header('footer');
     }
 
     public function not_found()
@@ -19,6 +19,5 @@ class indexController extends Controller
         $this->header('header');
         $this->view('notFound');
         $this->footer('footer');
-        exit();
     }
 }
