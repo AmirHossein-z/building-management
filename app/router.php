@@ -13,14 +13,14 @@ class Router
                 'pattern_url' => '/^\/auth\/login$/',
                 'controller' => 'authController',
                 'action' => 'login',
-                // 'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['Policy:is_login:dashboard/index'],
             ],
             'loggedIn' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/auth\/loggedIn$/',
                 'controller' => 'authController',
                 'action' => 'loggedIn',
-                // 'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['Policy:is_login:dashboard/index'],
             ],
             'logout' => [
                 'type' => 'GET',
@@ -33,21 +33,21 @@ class Router
                 'pattern_url' => '/^\/auth\/register$/',
                 'controller' => 'authController',
                 'action' => 'register',
-                // 'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['Policy:is_login:dashboard/index'],
             ],
             'registered' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/auth\/registered$/',
                 'controller' => 'authController',
                 'action' => 'registered',
-                // 'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['Policy:is_login:dashboard/index'],
             ],
             'dashboardIndex' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/index$/',
                 'controller' => 'dashboardController',
                 'action' => 'index',
-                // 'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['Policy:is_not_login:auth/login'],
             ]
         ];
 
