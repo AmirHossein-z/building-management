@@ -103,6 +103,7 @@ class authController extends Controller
             // save in session
             $_SESSION['name'] = $name;
             $_SESSION['id'] = $id;
+            $_SESSION['role'] = $role;
             // $this->set_alert('شما با موفقیت وارد شدید!', ALERT_SUCCESS);
             $this->redirect('dashboard/index');
         } else {
@@ -111,11 +112,11 @@ class authController extends Controller
         }
     }
 
-    // public function logout()
-    // {
-    //     session_destroy();
-    //     session_start();
-    //     $this->redirect('auth/login');
-    //     exit();
-    // }
+    public function logout()
+    {
+        session_destroy();
+        session_start();
+        $this->redirect('auth/login');
+        exit();
+    }
 }
