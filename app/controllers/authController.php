@@ -51,7 +51,7 @@ class authController extends Controller
           }
 
         if ($result['status']) {
-          echo "user already exists";
+            $this->alert('کاربری با این مشخصات وجود دارد', 'error');
         } else {
           if($role === 'role-manager'){
            $query_status = $person->addPerson('manager',$username,$phone,$email,$password) ;
@@ -59,8 +59,10 @@ class authController extends Controller
            $query_status = $person->addPerson('member',$username,$phone,$email,$password) ;
           }
           if($query_status['status'] === 1){
+                $this->alert('با موفقیت ثبت نام کردید', 'success');
                 $this->redirect('auth/login');
           }else {
+                $this->alert('خطا دوباره امتحان کردید', 'error');
                 $this->redirect('auth/register');
           }
         }
@@ -106,7 +108,7 @@ class authController extends Controller
             $this->alert('شما با موفقیت وارد شدید!', 'success');
             $this->redirect('dashboard/index');
         } else {
-            $this->set_alert('مشکلی در ورود پیش آمده است دوباره امتحان کنید', 'error');
+            $this->alert('مشکلی در ورود پیش آمده است دوباره امتحان کنید', 'error');
             $this->redirect('auth/login');
         }
     }

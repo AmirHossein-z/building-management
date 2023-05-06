@@ -10,7 +10,7 @@
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   <?php } ?>
-<?php } ?>
+<?php } $_SESSION['alert'] = null?>
 
 <!-- alert functionality -->
 <script>
