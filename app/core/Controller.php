@@ -7,6 +7,13 @@ class Controller
 
     }
 
+    public function alert(string $message, string $type)
+    {
+        $_SESSION['alert']['message'] = $message;
+        $_SESSION['alert']['type'] = $type;
+        return;
+    }
+
     /**
      * redirect to desired path
      * @param string $relative_path

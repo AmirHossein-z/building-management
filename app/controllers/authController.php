@@ -94,7 +94,6 @@ class authController extends Controller
           $result = $person->isPersonExists('member',$email,$password);
           }
 
-        var_dump($result);
         if ($result['status']) {
             $status = $result['status'];
             $name = $result['value']['name'];
@@ -104,10 +103,10 @@ class authController extends Controller
             $_SESSION['name'] = $name;
             $_SESSION['id'] = $id;
             $_SESSION['role'] = $role;
-            // $this->set_alert('شما با موفقیت وارد شدید!', ALERT_SUCCESS);
+            $this->alert('شما با موفقیت وارد شدید!', 'success');
             $this->redirect('dashboard/index');
         } else {
-            // $this->set_alert('مشکلی در ورود پیش آمده است دوباره امتحان کنید', ALERT_ERROR);
+            $this->set_alert('مشکلی در ورود پیش آمده است دوباره امتحان کنید', 'error');
             $this->redirect('auth/login');
         }
     }
