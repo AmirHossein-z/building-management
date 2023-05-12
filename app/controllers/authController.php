@@ -44,26 +44,22 @@ class authController extends Controller
         $role = filter_var($_POST['role'], FILTER_SANITIZE_STRING);
 
         $person = $this->model('person');
-        if($role === "role-manager") {
-          $result = $person->isPersonExists('manager',$email,$password);
-        }else{
-          $result = $person->isPersonExists('member',$email,$password);
-          }
+        $result = $person->isPersonExists($email,$password);
 
         if ($result['status']) {
             $this->alert('کاربری با این مشخصات وجود دارد', 'error');
         } else {
-          if($role === 'role-manager'){
-           $query_status = $person->addPerson('manager',$username,$phone,$email,$password) ;
-          }else {
-           $query_status = $person->addPerson('member',$username,$phone,$email,$password) ;
-          }
+          // if($role === 'role-manager'){
+          $query_status = $person->addPerson($username,$phone,$email,$password,$role === 'role-manager' ? 1 : 0) ;
+          // }else {
+          //  $query_status = $person->addPerson($username,$phone,$email,$password,0) ;
+          // }
           if($query_status['status'] === 1){
-                $this->alert('با موفقیت ثبت نام کردید', 'success');
-                $this->redirect('auth/login');
+            $this->alert('با موفقیت ثبت نام کردید', 'success');
+            $this->redirect('auth/login');
           }else {
-                $this->alert('خطا دوباره امتحان کردید', 'error');
-                $this->redirect('auth/register');
+            $this->alert('خطا دوباره امتحان کردید', 'error');
+            $this->redirect('auth/register');
           }
         }
     }
@@ -90,11 +86,7 @@ class authController extends Controller
         $role = filter_var($_POST['role'], FILTER_SANITIZE_STRING);
 
         $person = $this->model('person');
-        if($role === "role-manager") {
-          $result = $person->isPersonExists('manager',$email,$password);
-        }else{
-          $result = $person->isPersonExists('member',$email,$password);
-          }
+        $result = $person->isPersonExists($email,$password,$role === 'role-manager' ? 1 : 0);
 
         if ($result['status']) {
             $status = $result['status'];

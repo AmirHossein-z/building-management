@@ -12,9 +12,9 @@ class personModel extends Model {
      * @param string $password
      * @return array
      */
-    public function isPersonExists(string $person,string $email, string $password):array
+    public function isPersonExists(string $email, string $password):array
     {
-        $query = "SELECT * FROM $person WHERE email=? LIMIT 0,1";
+        $query = "SELECT * FROM person WHERE email=? LIMIT 0,1";
         $data = [
             ['type' => 's', 'value' => $email]
             // ['type' => 's', 'value' => $password]
@@ -33,18 +33,19 @@ class personModel extends Model {
         }
     }
 
-  public function addPerson(string $person, string $username, string $phone, string $email, string $password): array
+  public function addPerson(string $username, string $phone, string $email, string $password,$type): array
     {
 
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO $person (name,phone,email,password)
-         VALUES (?,?,?,?)";
+        $query = "INSERT INTO person (name,phone,email,password,type)
+         VALUES (?,?,?,?,?)";
         $data = [
             ['type' => 's', 'value' => $username],
             ['type' => 's', 'value' => $phone],
             ['type' => 's', 'value' => $email],
             ['type' => 's', 'value' => $password_hash],
+            ['type' => 'i', 'value' => $type],
         ];
         $status = $this->exeQuery($query, $data, false);
         if ($status) {

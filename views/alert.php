@@ -11,18 +11,3 @@
   </div>
   <?php } ?>
 <?php } $_SESSION['alert'] = null?>
-
-<!-- alert functionality -->
-<script>
-    const alert = document.querySelector("#alert");
-    const alertId = setTimeout(() => {
-        removeAlert(alert)
-    }, 5000);
-
-    const removeAlert = (e) => {
-        clearTimeout(alertId);
-        e.remove();
-    };
-
-    alert.addEventListener("click", () => removeAlert(alert));
-</script>
