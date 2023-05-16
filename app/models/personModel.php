@@ -5,13 +5,6 @@ class personModel extends Model {
     parent::__construct();
   }
 
-      /**
-     * check if person exists in db or not
-     * @param string $person
-     * @param string $email
-     * @param string $password
-     * @return array
-     */
     public function isPersonExists(string $email, string $password):array
     {
         $query = "SELECT * FROM person WHERE email=? LIMIT 0,1";
@@ -49,10 +42,41 @@ class personModel extends Model {
         ];
         $status = $this->exeQuery($query, $data, false);
         if ($status) {
-            return ['status' => 1, 'value' => $this->connection->insert_id];
+            return ['status' => true, 'value' => $this->connection->insert_id];
         } else {
-            return ['status' => 0, 'value' => 'Error'];
+            return ['status' => false, 'value' => 'Error'];
         }
-
     }
+
+  public function updatePersonById(int $person_id,string $username,string $phone):array {
+    $query = "UPDATE person SET name=?,phone=? WHERE id=?";
+    $data = [
+        ['type' => 's', 'value' => $username],
+        ['type' => 's', 'value' => $phone],
+        ['type' => 'i', 'value' => $person_id],
+    ];
+
+    $status = $this->exeQuery($query, $data, false);
+
+    if($status) {
+      return ['status' => true, 'value' => ""];
+    }else {
+      return ['status' => false, 'value' => ""];
+    }
+  }
+
+  public function getAllInfo(int $id):array
+  {
+        $query = "SELECT * FROM person WHERE id=?";
+        $data = [
+            ['type' => 's', 'value' => $id],
+        ];
+        $result = $this->exeQuery($query, $data,true);
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return [];
+        }
+  }
+
 }

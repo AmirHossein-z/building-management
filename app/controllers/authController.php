@@ -48,13 +48,14 @@ class authController extends Controller
 
         if ($result['status']) {
             $this->alert('کاربری با این مشخصات وجود دارد', 'error');
+            $this->redirect('auth/register');
         } else {
           // if($role === 'role-manager'){
           $query_status = $person->addPerson($username,$phone,$email,$password,$role === 'role-manager' ? 1 : 0) ;
           // }else {
           //  $query_status = $person->addPerson($username,$phone,$email,$password,0) ;
           // }
-          if($query_status['status'] === 1){
+          if($query_status['status']){
             $this->alert('با موفقیت ثبت نام کردید', 'success');
             $this->redirect('auth/login');
           }else {

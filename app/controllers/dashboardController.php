@@ -6,8 +6,11 @@ class dashboardController extends Controller {
   }
 
   public function index():void {
-        $this->header('header');
-        $this->view('dashboard/dashboard');
-        $this->footer('footer');
+    $person = $this->model('person');          
+    $data = $person->getAllInfo($_SESSION['id']);
+    
+    $this->header('header');
+    $this->view('dashboard/dashboard',$data);
+    $this->footer('footer');
   }
 }

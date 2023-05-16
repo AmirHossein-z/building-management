@@ -69,3 +69,9 @@
 
     </div>
   </main><!-- End #main -->
+
+<style>
+  input {
+background-color:transparent !important;
+}
+</style>
