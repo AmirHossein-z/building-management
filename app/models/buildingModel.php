@@ -19,6 +19,19 @@ class buildingModel extends Model {
         }
   }
 
+  public function getAllInfoByBuildingId(int $building_id):array {
+    $query = "SELECT * FROM building WHERE id=?";
+    $data = [
+        ['type' => 'i', 'value' => $building_id],
+    ];
+    $result = $this->exeQuery($query, $data,true);
+    if ($result->num_rows > 0) {
+        return $result->fetch_assoc();
+    } else {
+        return [];
+    }
+  }
+
   public function getAllInfo():array
   {
     $query = "SELECT * FROM building";

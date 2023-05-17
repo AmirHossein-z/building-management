@@ -71,7 +71,6 @@ class buildingController extends Controller {
     $result = $building->getAllInfoByPersonId($_SESSION['id']);
 
     $data = [
-      'building_id' => $result['id'],
       'info' => $result
     ];
 
@@ -95,32 +94,54 @@ class buildingController extends Controller {
 
   public function building_list() {
     $building = $this->model('building');
-    $buildings_info = $building->getAllInfo();
-    if(count($buildings_info) > 0) {
+    if($_SESSION['role'] === 'role-manager') {
+      $building_info = $building->getAllInfoByPersonId($_SESSION['id']);
 
       $info = [];
-      foreach ($buildings_info as $inner_array) {
+      $person = $this->model('person');
+      $person_info = $person->getAllInfo($_SESSION['id']);
 
-        $person = $this->model('person');
-        $person_info = $person->getAllInfo($inner_array[2]);
-
-        $object = array(
-            'id' => $inner_array[0],
-            'name' => $inner_array[1],
-            'person_name' => $person_info['name'],
-            'date_created' => $inner_array[3],
-            'date_updated' => $inner_array[4]
-        );
-        array_push($info,$object);
-      }
+      $object = array(
+          'id' => $building_info['id'],
+          'name' => $building_info['name'],
+          'person_name' => $person_info['name'],
+          'date_created' => $building_info['date_created'],
+          'date_updated' => $building_info['date_updated']
+      );
+      array_push($info,$object);
 
       $data = [
         'buildings' => $info,
       ];
     }else {
-      $data = [
-        'buildings' => [],
-      ];
+      $buildings_info = $building->getAllInfo();
+      if(count($buildings_info) > 0) {
+
+        $info = [];
+        foreach ($buildings_info as $inner_array) {
+
+          $person = $this->model('person');
+          $person_info = $person->getAllInfo($inner_array[2]);
+
+          $object = array(
+              'id' => $inner_array[0],
+              'name' => $inner_array[1],
+              'person_name' => $person_info['name'],
+              'date_created' => $inner_array[3],
+              'date_updated' => $inner_array[4]
+          );
+          array_push($info,$object);
+        }
+
+        $data = [
+          'buildings' => $info,
+        ];
+      }
+      else {
+        $data = [
+          'buildings' => [],
+        ];
+      }
     }
 
     $this->header('header');

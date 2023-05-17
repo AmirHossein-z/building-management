@@ -45,4 +45,34 @@ class buildingUnitModel extends Model {
             return [];
         }
   }
+
+  public function selectOne(int $building_unit_id,int $person_id) {
+    $query = "UPDATE building_unit SET person_id=? WHERE id=?";
+    $data = [
+        ['type' => 'i', 'value' => $person_id],
+        ['type' => 'i', 'value' => $building_unit_id],
+    ];
+
+    $status = $this->exeQuery($query, $data, false);
+
+    if($status) {
+      return ['status' => true, 'value' => ""];
+    }else {
+      return ['status' => false, 'value' => ""];
+    }
+  }
+
+  public function deletePersonFromBuildingUnit(int $building_unit_id):array {
+    $query = "UPDATE building_unit SET person_id=? WHERE id=?";
+    $data = [
+        ['type' => 'i', 'value' => null],
+        ['type' => 'i', 'value' => $building_unit_id],
+    ];
+    $status = $this->exeQuery($query, $data, false);
+    if($status) {
+      return ['status'=> true,'value'=> ''];
+    }else {
+      return ['status'=> false,'value'=> ''];
+    }
+  }
 }

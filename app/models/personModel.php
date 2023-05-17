@@ -5,12 +5,12 @@ class personModel extends Model {
     parent::__construct();
   }
 
-    public function isPersonExists(string $email, string $password):array
+    public function isPersonExists(string $email, string $password,int $type):array
     {
-        $query = "SELECT * FROM person WHERE email=? LIMIT 0,1";
+        $query = "SELECT * FROM person WHERE email=? AND type=? LIMIT 0,1";
         $data = [
-            ['type' => 's', 'value' => $email]
-            // ['type' => 's', 'value' => $password]
+            ['type' => 's', 'value' => $email],
+            ['type' => 'i', 'value' => $type]
         ];
         $result = $this->exeQuery($query, $data, true);
 
