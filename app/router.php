@@ -75,28 +75,28 @@ class Router
                 'pattern_url' => '/^\/dashboard\/edit_building_info$/',
                 'controller' => 'buildingController',
                 'action' => 'edit',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
             ],
             "edited_building_info" => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/edited_building_info\/\d{1,10}$/',
                 'controller' => 'buildingController',
                 'action' => 'edited',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
             ],
             'add_new_building' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/add_building$/',
                 'controller' => 'buildingController',
                 'action' => 'add',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
             ],
             'added_building' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/added_building$/',
                 'controller' => 'buildingController',
                 'action' => 'added',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
             ],
             'show_building_unit_info' => [
                 'type' => "GET",
@@ -144,14 +144,21 @@ class Router
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/bills$/',
                 'controller' => 'billController',
-                'action' => 'index',
+                'action' => 'bills_for_member',
                 'middleware' => ['Policy:is_not_login:auth/login'],
             ],
             'create_bill' => [
                 'type' => "GET",
-                'pattern_url' => '/^\/dashboard\/create_bill$/',
+                'pattern_url' => '/^\/dashboard\/create_bill\/\d{1,10}$/',
                 'controller' => 'billController',
-                'action' => 'create_one',
+                'action' => 'create',
+                'middleware' => ['Policy:is_not_login:auth/login'],
+            ],
+            'created_bill' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/dashboard\/created_bill$/',
+                'controller' => 'billController',
+                'action' => 'created',
                 'middleware' => ['Policy:is_not_login:auth/login'],
             ],
             'bills_list' => [
@@ -160,6 +167,12 @@ class Router
                 'controller' => 'billController',
                 'action' => 'bills_list',
                 'middleware' => ['Policy:is_not_login:auth/login'],
+            ],
+            'main_page' => [
+                'type' => "GET",
+                'pattern_url' => '/\/$/',
+                'controller' => 'indexController',
+                'action' => 'main',
             ],
         ];
 
@@ -173,7 +186,6 @@ class Router
                 ) && $request_type == $route['type']
             ) {
                 
-                //middleware check
                 if (isset($route['middleware']) && $route['middleware'] != '') {
                     foreach ($route['middleware'] as $middleware) {
                         $result = explode(':', $middleware);
@@ -194,14 +206,6 @@ class Router
                 call_user_func_array([$object, $route['action']], $params);
                 $page_found = true;
             }
-        }
-
-        // if user are in /, show main page
-        if ($url === '/') {
-            require_once 'app/controllers/indexController.php';
-            $object = new indexController();
-            $object->main();
-            $page_found = true;
         }
 
         // if page doesn't found,show 404 page

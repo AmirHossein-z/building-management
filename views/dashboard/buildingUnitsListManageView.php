@@ -1,3 +1,5 @@
+<a href="<?php echo URL ?>dashboard/create_bill_for_all" class="btn btn-primary">ایجاد قبض برای همه واحد های فعال</a>
+
 <?php if(count($data['building_units']) > 0) { ?>
     <div class="card">
       <div class="card-body">
@@ -19,7 +21,7 @@
                   <td><?php echo $building_unit['person_name'] ?? "این اتاق در حال حاضر صاحبی ندارد" ?></td>
                   <?php if($building_unit['person_id']) { ?>
                     <td>
-                      <a class="btn btn-success" href="<?php echo URL ?>dashboard/create_bill">تعیین قبض</a>
+                    <a class="btn btn-success" href="<?php echo URL ?>dashboard/create_bill/<?php echo $building_unit['id']; ?>">تعیین قبض برای این واحد</a>
                       <a class="btn btn-warning" href="<?php echo URL ?>dashboard/bills_list/<?php echo ($building_unit['person_id'] ?? ""); ?>">لیست قبض ها</a>
                     </td>
                   <?php } else { ?>

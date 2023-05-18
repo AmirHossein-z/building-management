@@ -23,4 +23,39 @@ class Policy extends Controller
         }
         return false;
     }
+
+    public function is_manager(string $path): bool
+    {
+        if (isset($_SESSION['id']) && $_SESSION['type'] === 'role-manager') {
+            $this->redirect($path);
+            return true;
+        }
+        return false;
+    }
+
+    public function not_manager(string $path):bool {
+        if (!(isset($_SESSION['id']) && $_SESSION['type'] === 'role-manager')) {
+            $this->redirect($path);
+            return true;
+        }
+        return false;
+    }
+
+    public function is_member(string $path): bool
+    {
+        if (isset($_SESSION['id']) && $_SESSION['type'] === 'role-member') {
+            $this->redirect($path);
+            return true;
+        }
+        return false;
+    }
+
+    public function not_member(string $path): bool
+    {
+        if (!(isset($_SESSION['id']) && $_SESSION['type'] === 'role-member')) {
+            $this->redirect($path);
+            return true;
+        }
+        return false;
+    }
 }

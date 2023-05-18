@@ -5,10 +5,10 @@
           <p>نام و نام خانوادگی: <span><?php echo $data['name'] ?></span></p>
           <p>ایمیل: <span><?php echo $data['email'] ?></span></p>
           <p>شماره تلفن :<span><?php echo $data['phone'] ?></span></p>
+          <div class="float-left">
+            <a href="<?php echo URL ?>dashboard/edit_profile" class="btn btn-primary">ویرایش اطلاعات</a>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-4">
-        <a href="<?php echo URL ?>dashboard/edit_profile" class="btn btn-primary">ویرایش اطلاعات</a>
       </div>
   </div>
 </section>

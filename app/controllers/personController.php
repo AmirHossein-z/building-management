@@ -21,6 +21,7 @@ class personController extends Controller {
     $person = $this->model('person');
     $status = $person->updatePersonById($_SESSION['id'],$username,$phone);
     if ($status) {
+      $_SESSION['name'] = $username;
       $this->alert('اطلاعات شما با موفقت ویرایش شد', 'success');
     }else {
       $this->alert('خطا دوباره امتحان کنید', 'error');

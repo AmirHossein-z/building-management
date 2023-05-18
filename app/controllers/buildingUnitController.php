@@ -28,6 +28,16 @@ class buildingUnitController extends Controller {
 
 
   public function building_units_list($building_id) {
+    // age modir sakhteman base bayad baresi beshe sakhteman sakhte ya na
+    // age sakhte bayad redirect beshe safhe list sakhteman ha
+    // darkhast dade vali age nasakhte bayad bere safhe didan sakhteman ta betone
+    // sakhteman besaze v hatman alert ham neshon bedim ke shoma sakhteman nasakhti
+    // 
+    //
+    // age karbar addie,bayad check beshe ghablan vahedi ro entekhab karde,
+    // age entekhab karde button ha gheir faal beshe vali age entekhab nakarde
+    // mitone entekhab kone har vahedi ke mikhad
+
     $building_unit = $this->model('buildingUnit');
     $building_units_info = $building_unit->getAllListByBuildingId($building_id);
     if(count($building_units_info) > 0) {
@@ -91,19 +101,6 @@ class buildingUnitController extends Controller {
     $this->header('header');
     $this->view('dashboard/dashboard',$data);
     $this->footer('footer');
-  }
-
-  public function delete($building_unit_id) {
-    $building_unit = $this->model('buildingUnit');          
-    $result = $building_unit->deletePersonFromBuildingUnit($building_unit_id);
-
-    if($result['status']) {
-      $this->alert('عملیات با موفقیت انجام شد','success');
-      $this->redirect('dashboard/building_unit');
-    }else {
-      $this->alert('خطا پیش آمده است.دوباره امتحان کنید','error');
-      $this->redirect('dashboard/building_unit');
-    }
   }
 
   public function building_units_list_manage() {

@@ -28,9 +28,13 @@
       <?php $this->view('dashboard/buildingList',$data); ?>
   <?php } elseif($_GET['url'] === 'dashboard/bills') { ?>
       <?php $this->view('dashboard/bills',$data); ?>
-  <?php } elseif(explode('/',$_GET['url'])[2]) { ?>
+  <?php } elseif(explode('/',($_GET['url']))[2]) { ?>
     <?php if($_GET['url'] === 'dashboard/building_units_list/'.explode('/',($_GET['url']))[2]) { ?>
       <?php $this->view('dashboard/buildingUnitsList',$data); ?>
+    <?php } elseif($_GET['url'] === 'dashboard/bills_list/'.explode('/',($_GET['url']))[2]) { ?>
+      <?php $this->view('dashboard/billsList',$data); ?>
+    <?php } elseif($_GET['url'] === 'dashboard/create_bill/'.explode('/',($_GET['url']))[2]) { ?>
+      <?php $this->view('dashboard/createBill',$data); ?>
     <?php } ?>
   <?php } ?>
 </main>

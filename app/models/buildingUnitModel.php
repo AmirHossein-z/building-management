@@ -19,6 +19,19 @@ class buildingUnitModel extends Model {
     }
   }
 
+  public function getInfo(int $building_unit_id):array {
+    $query = "SELECT * FROM building_unit WHERE id=? LIMIT 0,1";
+    $data = [
+        ['type' => 'i', 'value' => $building_unit_id],
+    ];
+    $result = $this->exeQuery($query, $data,true);
+    if($result) {
+      return ['status' => true, 'value' => $result->fetch_assoc()];
+    }else {
+      return ['status' => false,'value'=>''];
+    }
+  }
+
   public function getAllInfoByPersonId(int $person_id):array
   {
         $query = "SELECT * FROM building_unit WHERE person_id=? LIMIT 0,1";
@@ -62,17 +75,19 @@ class buildingUnitModel extends Model {
     }
   }
 
-  public function deletePersonFromBuildingUnit(int $building_unit_id):array {
-    $query = "UPDATE building_unit SET person_id=? WHERE id=?";
+  public function getBuildingInfo(int $person_id):array {
+    $query = "SELECT building.person_id FROM building INNER JOIN building_unit ON building.id = building_unit.building_id WHERE building_unit.person_id = ?;";
+
     $data = [
-        ['type' => 'i', 'value' => null],
-        ['type' => 'i', 'value' => $building_unit_id],
+        ['type' => 'i', 'value' => $person_id],
     ];
-    $status = $this->exeQuery($query, $data, false);
-    if($status) {
-      return ['status'=> true,'value'=> ''];
+
+    $result = $this->exeQuery($query, $data, true);
+
+    if($result->num_rows > 0) {
+      return ['status' => true, 'value' => $result->fetch_assoc()];
     }else {
-      return ['status'=> false,'value'=> ''];
+      return ['status' => false, 'value' => "Error"];
     }
   }
 }

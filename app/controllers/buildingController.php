@@ -6,13 +6,49 @@ class buildingController extends Controller {
   }
 
   public function index() {
-    $building = $this->model('building');          
-    $result = $building->getAllInfoByPersonId($_SESSION['id']);
+    if($_SESSION['role'] === 'role-manager') {
+      $manager_id = $_SESSION['id'];
 
-    $data = [
-      'info' => $result,
-      'role' => $_SESSION['role'],
-    ];
+      $building = $this->model('building');          
+      $result = $building->getAllInfoByPersonId($manager_id);
+
+      if(count($result)){
+        $data = [
+          'info' => $result,
+          'role' => $_SESSION['role'],
+        ];
+      }else {
+        $data = [
+          'info' => [],
+          'role' => $_SESSION['role'],
+        ];
+      }
+    }else {
+      $building_unit = $this->model('buildingUnit');
+      $result1 = $building_unit->getBuildingInfo($_SESSION['id']);
+
+      if($result1['status']) {
+        $building = $this->model('building');          
+        $result2 = $building->getAllInfoByPersonId((int) $result1['value']['person_id']);
+
+        if($result2) {
+          $data = [
+            'info' => $result2,
+            'role' => $_SESSION['role'],
+          ];
+        }else {
+          $data = [
+            'info' => [],
+            'role' => $_SESSION['role'],
+          ];
+        }
+      }else {
+        $data = [
+          'info' => [],
+          'role' => $_SESSION['role'],
+        ];
+      }
+    }
 
     $this->header('header');
     $this->view('dashboard/dashboard',$data);
