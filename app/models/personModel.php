@@ -82,4 +82,21 @@ class personModel extends Model
     }
   }
 
+  public function isPersonHasBuildingUnit(int $person_id): bool
+  {
+    $query = "SELECT building_unit.person_id FROM building_unit INNER JOIN person ON building_unit.person_id = person.id WHERE person.id = ?;";
+
+    $data = [
+      ['type' => 'i', 'value' => $person_id],
+    ];
+
+    $result = $this->exeQuery($query, $data, true);
+
+    if ($result->num_rows > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

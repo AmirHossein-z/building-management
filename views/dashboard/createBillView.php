@@ -16,6 +16,7 @@
               <option value="2">برق</option>
               <option value="3">گاز</option>
               <option value="4">تلفن ثابت</option>
+              <option value="5">شارژ ساختمان</option>
             </select>
           </div>
           <div class="row mb-3">

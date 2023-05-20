@@ -7,35 +7,14 @@ class authController extends Controller
         parent::__construct();
     }
 
-    /**
-     * save user session
-     * @param string $name
-     * @param int $id
-     * @return void
-     */
-    // public function save_user_session(string $name, int $id): void
-    // {
-    //     $_SESSION['name'] = $name;
-    //     $_SESSION['id'] = $id;
-    //     $_SESSION['type'] = $this->check_user();
-    // }
-
-    /**
-     * show register page
-     * @return void
-     */
-    public function register(): void
+    public function register()
     {
         $this->header('header');
         $this->view('auth/register');
         $this->footer('footer');
     }
 
-    /**
-     * register a user in database
-     * @return void
-     */
-    public function registered(): void
+    public function registered()
     {
         $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
         $phone = filter_var($_POST['phone'], FILTER_SANITIZE_NUMBER_INT);

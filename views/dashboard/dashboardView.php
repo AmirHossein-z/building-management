@@ -35,6 +35,8 @@
       <?php $this->view('dashboard/billsList', $data); ?>
     <?php } elseif ($_GET['url'] === 'dashboard/create_bill/' . explode('/', ($_GET['url']))[2]) { ?>
       <?php $this->view('dashboard/createBill', $data); ?>
+    <?php } elseif ($_GET['url'] === 'dashboard/edit_bill/' . explode('/', ($_GET['url']))[2]) { ?>
+      <?php $this->view('dashboard/editBill', $data); ?>
     <?php } ?>
   <?php } ?>
 </main>

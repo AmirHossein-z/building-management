@@ -119,13 +119,6 @@ class Router
                 'action' => 'building_units_list',
                 'middleware' => ['Policy:is_not_login:auth/login'],
             ],
-            'delete_building_unit_submitted' => [
-                'type' => "GET",
-                'pattern_url' => '/^\/dashboard\/delete_building_unit_submitted\/\d{1,10}$/',
-                'controller' => 'buildingUnitController',
-                'action' => 'delete',
-                'middleware' => ['Policy:is_not_login:auth/login'],
-            ],
             'select_building_unit' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/select_building_unit$/',
@@ -138,35 +131,56 @@ class Router
                 'pattern_url' => '/^\/dashboard\/building_units_list_manage$/',
                 'controller' => 'buildingUnitController',
                 'action' => 'building_units_list_manage',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             'show_bills' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/bills$/',
                 'controller' => 'billController',
                 'action' => 'bills_for_member',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_member:dashboard/index'],
             ],
             'create_bill' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/create_bill\/\d{1,10}$/',
                 'controller' => 'billController',
                 'action' => 'create',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             'created_bill' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/created_bill$/',
                 'controller' => 'billController',
                 'action' => 'created',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             'bills_list' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/bills_list\/\d{1,10}$/',
                 'controller' => 'billController',
                 'action' => 'bills_list',
-                'middleware' => ['Policy:is_not_login:auth/login'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
+            ],
+            'edit_bill' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/edit_bill\/\d{1,10}$/',
+                'controller' => 'billController',
+                'action' => 'edit',
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
+            ],
+            'edited_bill' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/dashboard\/edited_bill\/\d{1,10}$/',
+                'controller' => 'billController',
+                'action' => 'edited',
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
+            ],
+            'delete_bill' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/dashboard\/delete_bill\/\d{1,10}$/',
+                'controller' => 'billController',
+                'action' => 'delete',
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             'main_page' => [
                 'type' => "GET",
@@ -208,12 +222,10 @@ class Router
             }
         }
 
-        // if page doesn't found,show 404 page
         if (!$page_found) {
             require_once 'app/controllers/indexController.php';
             $object = new indexController();
             $object->not_found();
         }
-
     }
 }

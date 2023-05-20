@@ -141,22 +141,30 @@ class buildingController extends Controller
     if ($_SESSION['role'] === 'role-manager') {
       $building_info = $building->getAllInfoByPersonId($_SESSION['id']);
 
-      $info = [];
-      $person = $this->model('person');
-      $person_info = $person->getAllInfo($_SESSION['id']);
+      if (count($building_info) > 0) {
+        $info = [];
+        $person = $this->model('person');
+        $person_info = $person->getAllInfo($_SESSION['id']);
 
-      $object = array(
-        'id' => $building_info['id'],
-        'name' => $building_info['name'],
-        'person_name' => $person_info['name'],
-        'date_created' => $building_info['date_created'],
-        'date_updated' => $building_info['date_updated']
-      );
-      array_push($info, $object);
+        $object = array(
+          'id' => $building_info['id'],
+          'name' => $building_info['name'],
+          'person_name' => $person_info['name'],
+          'date_created' => $building_info['date_created'],
+          'date_updated' => $building_info['date_updated']
+        );
+        array_push($info, $object);
 
-      $data = [
-        'buildings' => $info,
-      ];
+        $data = [
+          'buildings' => $info,
+        ];
+
+      } else {
+        // bayad sakhteman besazad ta betavand list ra bebinad
+        $this->alert('باید یک ساختمان بسازید تا بتوانید لیست را مشاهده کنید', 'error');
+        $this->redirect('dashboard/add_building');
+      }
+
     } else {
       $buildings_info = $building->getAllInfo();
       if (count($buildings_info) > 0) {

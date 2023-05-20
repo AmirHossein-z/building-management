@@ -22,11 +22,12 @@
           </span></p>
       </div>
       <div class="m-2 d-flex gap-3 justify-content-end align-items-center">
+        <form method="POST" action="<?php echo URL ?>dashboard/delete_bill/<?php echo $bill['bill_id']; ?>"><button
+            type="submit" class="btn btn-danger">حذف</button></form>
         <a href="<?php echo URL ?>dashboard/edit_bill/<?php echo $bill['bill_id']; ?>" class="btn btn-primary">ویرایش</a>
-        <a href="<?php echo URL ?>dashboard/delete_bill/<?php echo $bill['bill_id']; ?>" class="btn btn-danger">حذف</a>
       </div>
     </div>
   <?php } ?>
 <?php } else { ?>
-  <p>در حال حاضر قبضی ثبت نشده است</p>
+  <p>در حال حاضر قبضی برای این شخص ثبت نشده است</p>
 <?php } ?>

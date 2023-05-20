@@ -27,7 +27,7 @@ class Policy extends Controller
 
     public function is_manager(string $path): bool
     {
-        if (isset($_SESSION['id']) && $_SESSION['type'] === 'role-manager') {
+        if (isset($_SESSION['id']) && $_SESSION['role'] === 'role-manager') {
             $this->redirect($path);
             return true;
         }
@@ -36,7 +36,7 @@ class Policy extends Controller
 
     public function not_manager(string $path): bool
     {
-        if (!(isset($_SESSION['id']) && $_SESSION['type'] === 'role-manager')) {
+        if (!(isset($_SESSION['id']) && $_SESSION['role'] === 'role-manager')) {
             $this->redirect($path);
             return true;
         }
@@ -45,7 +45,7 @@ class Policy extends Controller
 
     public function is_member(string $path): bool
     {
-        if (isset($_SESSION['id']) && $_SESSION['type'] === 'role-member') {
+        if (isset($_SESSION['id']) && $_SESSION['role'] === 'role-member') {
             $this->redirect($path);
             return true;
         }
@@ -54,7 +54,7 @@ class Policy extends Controller
 
     public function not_member(string $path): bool
     {
-        if (!(isset($_SESSION['id']) && $_SESSION['type'] === 'role-member')) {
+        if (!(isset($_SESSION['id']) && $_SESSION['role'] === 'role-member')) {
             $this->redirect($path);
             return true;
         }

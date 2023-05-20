@@ -32,45 +32,102 @@ class buildingUnitController extends Controller
 
   public function building_units_list($building_id)
   {
-    // age modir sakhteman base bayad baresi beshe sakhteman sakhte ya na
-    // age sakhte bayad redirect beshe safhe list sakhteman ha
-    // darkhast dade vali age nasakhte bayad bere safhe didan sakhteman ta betone
-    // sakhteman besaze v hatman alert ham neshon bedim ke shoma sakhteman nasakhti
-    // 
-    //
-    // age karbar addie,bayad check beshe ghablan vahedi ro entekhab karde,
-    // age entekhab karde button ha gheir faal beshe vali age entekhab nakarde
-    // mitone entekhab kone har vahedi ke mikhad
+    if ($_SESSION['role'] === 'role-manager') {
+      $building = $this->model('building');
+      $result = $building->getAllInfoByPersonId($_SESSION['id']);
+      if (count($result) > 0) {
+        // modir sakhteman sakhteman darad
+        if ($result['id'] === (int) $building_id) {
+          // sakhteman khodash hast
+          $building_unit = $this->model('buildingUnit');
+          $building_units_info = $building_unit->getAllListByBuildingId($building_id);
 
-    $building_unit = $this->model('buildingUnit');
-    $building_units_info = $building_unit->getAllListByBuildingId($building_id);
-    if (count($building_units_info) > 0) {
+          if (count($building_units_info) > 0) {
 
-      $info = [];
-      foreach ($building_units_info as $inner_array) {
+            $info = [];
+            foreach ($building_units_info as $inner_array) {
 
-        $person = $this->model('person');
-        $person_info = $person->getAllInfo($inner_array[2] ?? 0);
+              // age modir bod,nemikhad ghabz vasash tayin beshe
+              if ($inner_array[2] === $_SESSION['id']) {
+                continue;
+              }
+              $person = $this->model('person');
+              $person_info = $person->getAllInfo($inner_array[2] ?? 0);
 
-        $object = array(
-          'id' => $inner_array[0],
-          'building_id' => $inner_array[1],
-          'person_name' => $person_info['name'] ?? null,
-          'number' => $inner_array[3],
-          'date_created' => $inner_array[4],
-          'date_updated' => $inner_array[5]
-        );
-        array_push($info, $object);
+              $object = array(
+                'id' => $inner_array[0],
+                'building_id' => $inner_array[1],
+                'person_name' => $person_info['name'] ?? null,
+                'number' => $inner_array[3],
+                'date_created' => $inner_array[4],
+                'date_updated' => $inner_array[5]
+              );
+              array_push($info, $object);
+            }
+
+            $data = [
+              'building_units' => $info,
+            ];
+          } else {
+            $data = [
+              'building_units' => [],
+            ];
+          }
+        } else {
+          // modir sakhteman daram vali be list sakhteman digar
+          // ra mikhahad moshahede konad be safhe list sakhteman ha
+          // redirect mikonim
+          $this->alert('شما فقط مجاز به انتخاب واحد در ساختمان خود هستید', 'error');
+          $this->redirect('dashboard/building_list');
+        }
+      } else {
+        // ya sakhteman modir nist ya hanoz sakhteman nasakhte
+        // age sakhteman modir nist pas hagh nadare bebine 
+        // chon faghat mitone dakhel sakhteman khodesh
+        // vahed entekhab kone
+        $this->redirect('dashboard/building_list');
       }
+    } else if ($_SESSION['role'] === 'role-member') {
+      $person = $this->model('person');
+      $status = $person->isPersonHasBuildingUnit($_SESSION['id']);
+      if ($status) {
+        // member hast & sakhteman darad pas bayad etelaat sakhteman khod ra bebinad
+        $this->alert('شما در حال حاضر صاحب یک واحد ساختمان هستید', 'error');
+        $this->redirect('dashboard/building_list');
+      } else {
+        // member hast vali sakhteman nadarad pas neshan bede etelaat ra
+        $building_unit = $this->model('buildingUnit');
+        $building_units_info = $building_unit->getAllListByBuildingId($building_id);
+        if (count($building_units_info) > 0) {
 
-      $data = [
-        'building_units' => $info,
-      ];
-    } else {
-      $data = [
-        'building_units' => [],
-      ];
+          $info = [];
+          foreach ($building_units_info as $inner_array) {
+
+            $person = $this->model('person');
+            $person_info = $person->getAllInfo($inner_array[2] ?? 0);
+
+            $object = array(
+              'id' => $inner_array[0],
+              'building_id' => $inner_array[1],
+              'person_name' => $person_info['name'] ?? null,
+              'number' => $inner_array[3],
+              'date_created' => $inner_array[4],
+              'date_updated' => $inner_array[5]
+            );
+            array_push($info, $object);
+          }
+
+          $data = [
+            'building_units' => $info,
+          ];
+        } else {
+          $data = [
+            'building_units' => [],
+          ];
+        }
+      }
     }
+
 
     $this->header('header');
     $this->view('dashboard/dashboard', $data);
@@ -114,31 +171,42 @@ class buildingUnitController extends Controller
     $building = $this->model('building');
     $building_info = $building->getAllInfoByPersonId($_SESSION['id']);
 
-    $building_unit = $this->model('buildingUnit');
-    $building_units_info = $building_unit->getAllListByBuildingId($building_info['id']);
-    if (count($building_units_info) > 0) {
+    if (count($building_info) > 0) {
 
-      $info = [];
-      foreach ($building_units_info as $inner_array) {
+      $building_unit = $this->model('buildingUnit');
+      $building_units_info = $building_unit->getAllListByBuildingId($building_info['id']);
+      if (count($building_units_info) > 0) {
 
-        $person = $this->model('person');
-        $person_info = $person->getAllInfo($inner_array[2] ?? 0);
+        $info = [];
+        foreach ($building_units_info as $inner_array) {
 
-        $object = array(
-          'id' => $inner_array[0],
-          'building_id' => $inner_array[1],
-          'person_name' => $person_info['name'] ?? null,
-          'person_id' => $person_info['id'] ?? null,
-          'number' => $inner_array[3],
-          'date_created' => $inner_array[4],
-          'date_updated' => $inner_array[5]
-        );
-        array_push($info, $object);
+          // age modir bod,nemikhad ghabz vasash tayin beshe
+          if ($inner_array[2] === $_SESSION['id']) {
+            continue;
+          }
+          $person = $this->model('person');
+          $person_info = $person->getAllInfo($inner_array[2] ?? 0);
+
+          $object = array(
+            'id' => $inner_array[0],
+            'building_id' => $inner_array[1],
+            'person_name' => $person_info['name'] ?? null,
+            'person_id' => $person_info['id'] ?? null,
+            'number' => $inner_array[3],
+            'date_created' => $inner_array[4],
+            'date_updated' => $inner_array[5]
+          );
+          array_push($info, $object);
+        }
+
+        $data = [
+          'building_units' => $info,
+        ];
+      } else {
+        $data = [
+          'building_units' => [],
+        ];
       }
-
-      $data = [
-        'building_units' => $info,
-      ];
     } else {
       $data = [
         'building_units' => [],

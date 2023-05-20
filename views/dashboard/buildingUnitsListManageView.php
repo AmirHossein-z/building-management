@@ -1,6 +1,5 @@
-<a href="<?php echo URL ?>dashboard/create_bill_for_all" class="btn btn-primary">ایجاد قبض برای همه واحد های فعال</a>
-
 <?php if (count($data['building_units']) > 0) { ?>
+  <a href="<?php echo URL ?>dashboard/create_bill_for_all" class="btn btn-primary">ایجاد قبض برای همه واحد های فعال</a>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">واحد های ساختمان </h5>
