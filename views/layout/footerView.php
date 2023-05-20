@@ -1,6 +1,6 @@
 <?php require('views/alert.php'); ?>
 
-  <!-- Vendor JS Files -->
+<!-- Vendor JS Files -->
 <script src="<?php echo URL ?>assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script src="<?php echo URL ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo URL ?>assets/vendor/chart.js/chart.umd.js"></script>
@@ -13,4 +13,5 @@
 <!-- Template Main JS File -->
 <script src="<?php echo URL ?>assets/js/main.js"></script>
 </body>
+
 </html>

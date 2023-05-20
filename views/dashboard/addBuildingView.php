@@ -8,7 +8,7 @@
           <div class="col-sm-10">
             <input type="text" class="form-control" id="building_name" name="building_name">
           </div>
-          </div>
+        </div>
         <div class="col-sm-5">
           <label for="building_unit_count" class="col-form-label">تعداد واحد های ساختمان</label>
           <div class="col-sm-10">
@@ -28,4 +28,4 @@
     </form>
 
   </div>
-  </div>
+</div>

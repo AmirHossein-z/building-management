@@ -16,8 +16,9 @@ class Policy extends Controller
         return false;
     }
 
-    public function is_not_login(string $path):bool {
-        if(!(isset($_SESSION) && isset($_SESSION['id']))) {
+    public function is_not_login(string $path): bool
+    {
+        if (!(isset($_SESSION) && isset($_SESSION['id']))) {
             $this->redirect($path);
             return true;
         }
@@ -33,7 +34,8 @@ class Policy extends Controller
         return false;
     }
 
-    public function not_manager(string $path):bool {
+    public function not_manager(string $path): bool
+    {
         if (!(isset($_SESSION['id']) && $_SESSION['type'] === 'role-manager')) {
             $this->redirect($path);
             return true;

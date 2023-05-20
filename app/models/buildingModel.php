@@ -1,76 +1,79 @@
 <?php
 
-class buildingModel extends Model {
-  public function __construct() {
+class buildingModel extends Model
+{
+  public function __construct()
+  {
     parent::__construct();
   }
 
-  public function getAllInfoByPersonId(int $person_id):array
+  public function getAllInfoByPersonId(int $person_id): array
   {
-        $query = "SELECT * FROM building WHERE person_id=?";
-        $data = [
-            ['type' => 'i', 'value' => $person_id],
-        ];
-        $result = $this->exeQuery($query, $data,true);
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        } else {
-            return [];
-        }
-  }
-
-  public function getAllInfoByBuildingId(int $building_id):array {
-    $query = "SELECT * FROM building WHERE id=?";
+    $query = "SELECT * FROM building WHERE person_id=?";
     $data = [
-        ['type' => 'i', 'value' => $building_id],
+      ['type' => 'i', 'value' => $person_id],
     ];
-    $result = $this->exeQuery($query, $data,true);
+    $result = $this->exeQuery($query, $data, true);
     if ($result->num_rows > 0) {
-        return $result->fetch_assoc();
+      return $result->fetch_assoc();
     } else {
-        return [];
+      return [];
     }
   }
 
-  public function getAllInfo():array
+  public function getAllInfoByBuildingId(int $building_id): array
+  {
+    $query = "SELECT * FROM building WHERE id=?";
+    $data = [
+      ['type' => 'i', 'value' => $building_id],
+    ];
+    $result = $this->exeQuery($query, $data, true);
+    if ($result->num_rows > 0) {
+      return $result->fetch_assoc();
+    } else {
+      return [];
+    }
+  }
+
+  public function getAllInfo(): array
   {
     $query = "SELECT * FROM building";
     $data = [];
-    $result = $this->exeQuery($query, $data,true);
+    $result = $this->exeQuery($query, $data, true);
     if ($result->num_rows > 0) {
-        return $result->fetch_all();
+      return $result->fetch_all();
     } else {
-        return [];
+      return [];
     }
   }
-  public function create(string $name,int $person_id):array
+  public function create(string $name, int $person_id): array
   {
-      $query = "INSERT INTO building (name,person_id) VALUES(?,?)";
-      $data = [
-          ['type' => 's', 'value' => $name],
-          ['type' => 'i', 'value' => $person_id],
-      ];
-      $result = $this->exeQuery($query, $data,false);
-      if($result) {
-        return ['status' => true, 'value' => $this->connection->insert_id];
-      }else {
-        return ['status' => false,'value'=>''];
-      }
+    $query = "INSERT INTO building (name,person_id) VALUES(?,?)";
+    $data = [
+      ['type' => 's', 'value' => $name],
+      ['type' => 'i', 'value' => $person_id],
+    ];
+    $result = $this->exeQuery($query, $data, false);
+    if ($result) {
+      return ['status' => true, 'value' => $this->connection->insert_id];
+    } else {
+      return ['status' => false, 'value' => ''];
+    }
   }
 
-  public function update_info(string $name,int $id):array
+  public function update_info(string $name, int $id): array
   {
     $query = "UPDATE building SET name=? WHERE id=?";
     $data = [
-        ['type' => 's', 'value' => $name],
-        ['type' => 'i', 'value' => $id],
+      ['type' => 's', 'value' => $name],
+      ['type' => 'i', 'value' => $id],
     ];
 
     $status = $this->exeQuery($query, $data, false);
 
-    if($status) {
+    if ($status) {
       return ['status' => true, 'value' => ""];
-    }else {
+    } else {
       return ['status' => false, 'value' => ""];
     }
   }

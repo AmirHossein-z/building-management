@@ -64,13 +64,13 @@ class Controller
     {
         require 'views/layout/' . $path . '.php';
     }
-    
+
     /**
      * import DB model
      * @param string $model_name
      * @return object
      */
-    public function model(string $model_name):object
+    public function model(string $model_name): object
     {
         $filename = $model_name . 'Model';
         require_once 'app/models/' . $filename . '.php';

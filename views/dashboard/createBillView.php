@@ -1,8 +1,10 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">
-    ایجاد قبض برای واحد با شماره<span><?php echo $data['number']; ?></span>
-</h5>
+      ایجاد قبض برای واحد با شماره<span>
+        <?php echo $data['number']; ?>
+      </span>
+    </h5>
 
     <form method="POST" action="<?php echo URL ?>dashboard/created_bill">
       <div id="bill_container">
@@ -43,7 +45,7 @@
     let newBill = `
       <div id="bill${length + 1}">
         <div class="row mb-3">
-          <select id="bill_type_${length + 1}" class="form-select" name="bill_type_${length+1}">
+          <select id="bill_type_${length + 1}" class="form-select" name="bill_type_${length + 1}">
             <option disabled>نوع قبض را انتخاب کنید</option>
             <option value="1">آب</option>
             <option value="2">برق</option>

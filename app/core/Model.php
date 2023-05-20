@@ -16,7 +16,7 @@ class Model
      * @return bool|mysqli_result
      */
     public function exeQuery(string $query, array $data = [], bool $returnData)
-    { 
+    {
         /*
             data should be like
             $data = [

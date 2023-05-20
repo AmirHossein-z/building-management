@@ -5,7 +5,7 @@ class Router
     public function __construct()
     {
         $request_type = $_SERVER['REQUEST_METHOD'];
-        $url = '/' . ( $_GET['url'] ?? "");
+        $url = '/' . ($_GET['url'] ?? "");
 
         $routes = [
             'login' => [
@@ -75,28 +75,28 @@ class Router
                 'pattern_url' => '/^\/dashboard\/edit_building_info$/',
                 'controller' => 'buildingController',
                 'action' => 'edit',
-                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             "edited_building_info" => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/edited_building_info\/\d{1,10}$/',
                 'controller' => 'buildingController',
                 'action' => 'edited',
-                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             'add_new_building' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/add_building$/',
                 'controller' => 'buildingController',
                 'action' => 'add',
-                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             'added_building' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/added_building$/',
                 'controller' => 'buildingController',
                 'action' => 'added',
-                'middleware' => ['Policy:is_not_login:auth/login','Policy:not_manager:dashboard/index'],
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
             'show_building_unit_info' => [
                 'type' => "GET",
@@ -185,7 +185,7 @@ class Router
                     $matches
                 ) && $request_type == $route['type']
             ) {
-                
+
                 if (isset($route['middleware']) && $route['middleware'] != '') {
                     foreach ($route['middleware'] as $middleware) {
                         $result = explode(':', $middleware);
@@ -199,7 +199,7 @@ class Router
                     }
                 }
                 $params = (array) explode('/', $matches[0]);
-                if(isset($params[3]))
+                if (isset($params[3]))
                     $params = (array) explode('/', $matches[0])[3];
                 require 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
@@ -209,7 +209,7 @@ class Router
         }
 
         // if page doesn't found,show 404 page
-        if(!$page_found) {
+        if (!$page_found) {
             require_once 'app/controllers/indexController.php';
             $object = new indexController();
             $object->not_found();
