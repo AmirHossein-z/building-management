@@ -8,36 +8,39 @@
 
 <!-- main -->
 <main id="main" class="main">
-  <?php if ($_GET['url'] === 'dashboard/index') { ?>
-    <?php $this->view('dashboard/profile', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/edit_profile') { ?>
-    <?php $this->view('dashboard/editProfile', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/building') { ?>
-    <?php $this->view('dashboard/building', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/add_building') { ?>
-    <?php $this->view('dashboard/addBuilding'); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/edit_building_info') { ?>
-    <?php $this->view('dashboard/editBuildingInfo', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/building_unit') { ?>
-    <?php $this->view('dashboard/buildingUnit', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/building_list') { ?>
-    <?php $this->view('dashboard/buildingList', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/building_units_list_manage') { ?>
-    <?php $this->view('dashboard/buildingUnitsListManage', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/building_list') { ?>
-    <?php $this->view('dashboard/buildingList', $data); ?>
-  <?php } elseif ($_GET['url'] === 'dashboard/bills') { ?>
-    <?php $this->view('dashboard/bills', $data); ?>
-  <?php } elseif (explode('/', ($_GET['url']))[2]) { ?>
-    <?php if ($_GET['url'] === 'dashboard/building_units_list/' . explode('/', ($_GET['url']))[2]) { ?>
-      <?php $this->view('dashboard/buildingUnitsList', $data); ?>
-    <?php } elseif ($_GET['url'] === 'dashboard/bills_list/' . explode('/', ($_GET['url']))[2]) { ?>
-      <?php $this->view('dashboard/billsList', $data); ?>
-    <?php } elseif ($_GET['url'] === 'dashboard/create_bill/' . explode('/', ($_GET['url']))[2]) { ?>
-      <?php $this->view('dashboard/createBill', $data); ?>
-    <?php } elseif ($_GET['url'] === 'dashboard/edit_bill/' . explode('/', ($_GET['url']))[2]) { ?>
-      <?php $this->view('dashboard/editBill', $data); ?>
-    <?php } ?>
-  <?php } ?>
+  <?php if ($_GET['url'] === 'dashboard/index') {
+    $this->view('dashboard/profile', $data);
+  } elseif ($_GET['url'] === 'dashboard/edit_profile') {
+    $this->view('dashboard/editProfile', $data);
+  } elseif ($_GET['url'] === 'dashboard/building') {
+    $this->view('dashboard/building', $data);
+  } elseif ($_GET['url'] === 'dashboard/add_building') {
+    $this->view('dashboard/addBuilding');
+  } elseif ($_GET['url'] === 'dashboard/edit_building_info') {
+    $this->view('dashboard/editBuildingInfo', $data);
+  } elseif ($_GET['url'] === 'dashboard/building_unit') {
+    $this->view('dashboard/buildingUnit', $data);
+  } elseif ($_GET['url'] === 'dashboard/building_list') {
+    $this->view('dashboard/buildingList', $data);
+  } elseif ($_GET['url'] === 'dashboard/building_units_list_manage') {
+    $this->view('dashboard/buildingUnitsListManage', $data);
+  } elseif ($_GET['url'] === 'dashboard/building_list') {
+    $this->view('dashboard/buildingList', $data);
+  } elseif ($_GET['url'] === 'dashboard/bills') {
+    $this->view('dashboard/bills', $data);
+  } elseif (explode('/', ($_GET['url']))[2]) {
+    $param = explode('/', $_GET['url'])[2];
+    if ($_GET['url'] === 'dashboard/building_units_list/' . $param) {
+      $this->view('dashboard/buildingUnitsList', $data);
+    } elseif ($_GET['url'] === 'dashboard/bills_list/' . $param) {
+      $this->view('dashboard/billsList', $data);
+    } elseif ($_GET['url'] === 'dashboard/create_bill/' . $param) {
+      $this->view('dashboard/createBill', $data);
+    } elseif ($_GET['url'] === 'dashboard/edit_bill/' . $param) {
+      $this->view('dashboard/editBill', $data);
+    } else if ($_GET['url'] === 'dashboard/create_bill_for_all/' . $param) {
+      $this->view('dashboard/createBillForAll', $data);
+    }
+  } ?>
 </main>
 <!-- main -->

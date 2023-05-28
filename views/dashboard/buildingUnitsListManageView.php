@@ -1,5 +1,11 @@
 <?php if (count($data['building_units']) > 0) { ?>
-  <a href="<?php echo URL ?>dashboard/create_bill_for_all" class="btn btn-primary">ایجاد قبض برای همه واحد های فعال</a>
+  <?php foreach ($data['building_units'] as $index => $building_unit) { ?>
+    <a href="<?php echo URL ?>dashboard/create_bill_for_all/<?php echo $building_unit['building_id']; ?>"
+      class="btn btn-primary">ایجاد قبض برای همه واحد های فعال</a>
+    <?php if ($index === 0)
+      break; ?>
+  <?php } ?>
+
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">واحد های ساختمان </h5>

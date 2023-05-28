@@ -70,7 +70,7 @@ class buildingController extends Controller
         'role' => $_SESSION['role'],
       ];
       $this->header('header');
-      $this->view('dashboard/dashboard');
+      $this->view('dashboard/dashboard', $data);
       $this->footer('footer');
     }
   }
@@ -79,7 +79,7 @@ class buildingController extends Controller
   {
     $building_name = filter_var($_POST['building_name'], FILTER_SANITIZE_STRING);
     $building_unit_count = (int) filter_var($_POST['building_unit_count'], FILTER_SANITIZE_NUMBER_INT);
-    $building_start_number = (int) filter_var($_POST['building_unit_count'], FILTER_SANITIZE_NUMBER_INT);
+    $building_start_number = (int) filter_var($_POST['building_start_number'], FILTER_SANITIZE_NUMBER_INT);
 
     $building = $this->model('building');
     $result1 = $building->create($building_name, $_SESSION['id']);

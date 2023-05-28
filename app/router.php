@@ -154,6 +154,20 @@ class Router
                 'action' => 'created',
                 'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
+            'create_bill_for_all' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/create_bill_for_all\/\d{1,10}$/',
+                'controller' => 'billController',
+                'action' => 'create_for_all',
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
+            ],
+            'created_bill_for_all' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/dashboard\/created_bill_for_all$/',
+                'controller' => 'billController',
+                'action' => 'created_for_all',
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
+            ],
             'bills_list' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/bills_list\/\d{1,10}$/',

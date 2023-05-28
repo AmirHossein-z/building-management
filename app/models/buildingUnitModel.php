@@ -97,4 +97,20 @@ class buildingUnitModel extends Model
       return ['status' => false, 'value' => "Error"];
     }
   }
+
+  public function getBuildingInfoActive(int $building_id): array
+  {
+    $query = "SELECT * FROM building_unit WHERE building_id = ? AND person_id IS NOT NULL";
+    $data = [
+      ['type' => 'i', 'value' => $building_id],
+    ];
+
+    $result = $this->exeQuery($query, $data, true);
+
+    if ($result->num_rows > 0) {
+      return ['status' => true, 'value' => $result->fetch_all()];
+    } else {
+      return ['status' => false, 'value' => 'Error'];
+    }
+  }
 }

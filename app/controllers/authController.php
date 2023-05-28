@@ -44,10 +44,6 @@ class authController extends Controller
         }
     }
 
-    /**
-     * show login page
-     * @return void
-     */
     public function login(): void
     {
         $this->header('header');
@@ -55,10 +51,6 @@ class authController extends Controller
         $this->footer('footer');
     }
 
-    /**
-     * login a user  
-     * @return void
-     */
     public function loggedIn(): void
     {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);

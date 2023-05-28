@@ -166,4 +166,54 @@ class billController extends Controller
     $this->alert('قبض با موفقیت حذف شد', 'error');
     $this->redirect('dashboard/building_units_list_manage');
   }
+
+  public function create_for_all($building_id)
+  {
+    $data = [
+      'building_id' => $building_id,
+    ];
+    $this->header('header');
+    $this->view('dashboard/dashboard', $data);
+    $this->footer('footer');
+  }
+
+  public function created_for_all()
+  {
+    // get all ids from building unit that are active
+    $building_unit = $this->model("buildingUnit");
+    $result = $building_unit->getBuildingInfoActive(filter_var($_POST['building_id'], FILTER_SANITIZE_NUMBER_INT));
+    if ($result['status']) {
+      // building info darim
+
+      foreach ($result['value'] as $building_unit) {
+        // age modir bod nabayad ghabz sabt beshe
+        if ($_SESSION['role'] === 'role-manager' && $building_unit[2] === $_SESSION['id'])
+          continue;
+
+        $building_unit_id = $building_unit[0];
+        $bill = $this->model("bill");
+        $i = 1;
+        while (isset($_POST['bill_type_' . $i]) && isset($_POST['bill_price_' . $i])) {
+          $bill_type = filter_var($_POST['bill_type_' . $i], FILTER_SANITIZE_NUMBER_INT);
+          $bill_price = (float) filter_var($_POST['bill_price_' . $i], FILTER_SANITIZE_NUMBER_FLOAT);
+
+          $result = $bill->create($bill_type, $bill_price, $building_unit_id);
+          if (!$result['status']) {
+            $this->alert('مشکلی پیش آمده است.دوباره سعی کنید', 'error');
+            $this->redirect('dashboard/building_units_list_manage');
+            break;
+          }
+
+          $i++;
+        }
+      }
+
+      $this->alert('قبض ها با موفقیت ثبت شد', 'success');
+      $this->redirect('dashboard/building_units_list_manage');
+
+    } else {
+      $this->alert('در حال حاضر واحدی ثبت نشده است', 'error');
+      $this->redirect('dashboard/building_units_list_manage');
+    }
+  }
 }

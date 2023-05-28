@@ -36,7 +36,7 @@ class buildingUnitController extends Controller
       $building = $this->model('building');
       $result = $building->getAllInfoByPersonId($_SESSION['id']);
       if (count($result) > 0) {
-        // modir sakhteman sakhteman darad
+        // modir sakhteman, sakhteman darad
         if ($result['id'] === (int) $building_id) {
           // sakhteman khodash hast
           $building_unit = $this->model('buildingUnit');
@@ -47,10 +47,6 @@ class buildingUnitController extends Controller
             $info = [];
             foreach ($building_units_info as $inner_array) {
 
-              // age modir bod,nemikhad ghabz vasash tayin beshe
-              if ($inner_array[2] === $_SESSION['id']) {
-                continue;
-              }
               $person = $this->model('person');
               $person_info = $person->getAllInfo($inner_array[2] ?? 0);
 
@@ -136,20 +132,29 @@ class buildingUnitController extends Controller
 
   public function select()
   {
-    $building_unit_number = filter_var($_POST['building_unit_number'], FILTER_SANITIZE_STRING);
-    $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
-    $person_id = $_SESSION['id'];
-
+    // age ghablan vahed entekhab karde nabayad 
+    // alan betone dobare entekhab kone
     $building_unit = $this->model('buildingUnit');
-    $result = $building_unit->selectOne($id, $person_id);
-    if ($result['status']) {
-      $this->alert('با موفقیت واحد به نام شما ثبت شد', 'success');
-      $this->redirect('dashboard/building_unit');
+    $result = $building_unit->getAllInfoByPersonId($_SESSION['id']);
+    if (count($result) > 0) {
+      $this->alert('شما دارای یک واحد از ساختمان هستید و نمی توانید دوباره انتخاب کنید', 'error');
+      $this->redirect('dashboard/building_list');
     } else {
-      $this->alert('مشکلی پیش آمده است دوباره امتحان کنید', 'error');
-      $this->redirect('dashboard/building_unit');
+
+      $building_unit_number = filter_var($_POST['building_unit_number'], FILTER_SANITIZE_STRING);
+      $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+      $person_id = $_SESSION['id'];
+
+      $building_unit = $this->model('buildingUnit');
+      $result = $building_unit->selectOne($id, $person_id);
+      if ($result['status']) {
+        $this->alert('با موفقیت واحد به نام شما ثبت شد', 'success');
+        $this->redirect('dashboard/building_unit');
+      } else {
+        $this->alert('مشکلی پیش آمده است دوباره امتحان کنید', 'error');
+        $this->redirect('dashboard/building_unit');
+      }
     }
-    return;
   }
 
   public function edit()
