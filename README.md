@@ -9,7 +9,7 @@ First install xampp first from this [link](https://www.apachefriends.org/).
 
 then copy all file project to htdocs directory.
 
-then create a database in phpmyadmin named **building-mgmt**.
+then create a database in phpmyadmin named **building-mgmt** and import database from dababase folder in this project.
 
 then open this [link](http://localhost/building-management) in browser
 
