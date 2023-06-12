@@ -21,17 +21,17 @@ class Controller
 
     public function view(string $path, array $data = []): void
     {
-        require 'views/' . $path . 'View.php';
+        require_once 'views/' . $path . 'View.php';
     }
 
     public function header(string $path): void
     {
-        require "views/layout/" . $path . "View.php";
+        require_once "views/layout/" . $path . "View.php";
     }
 
     public function footer(string $path): void
     {
-        require "views/layout/" . $path . "View.php";
+        require_once "views/layout/" . $path . "View.php";
     }
 
     /**
@@ -41,7 +41,7 @@ class Controller
      */
     public function navbar(string $path): void
     {
-        require 'views/layout/' . $path . '.php';
+        require_once 'views/layout/' . $path . '.php';
     }
 
     /**

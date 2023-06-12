@@ -7,6 +7,19 @@ class billModel extends Model
     parent::__construct();
   }
 
+  public function getInfoByBuildingUnitId($building_unit_id)
+  {
+    $query = 'SELECT * FROM bill WHERE building_unit_id = ?';
+    $data = [
+      ['type' => 'i', 'value' => $building_unit_id]
+    ];
+    $result = $this->exeQuery($query, $data, true);
+    if ($result->num_rows > 0) {
+      return ['status' => true, 'value' => $result->fetch_all()];
+    } else {
+      return ['status' => false, 'value' => 'ERROR'];
+    }
+  }
   public function getInfo(int $bill_id)
   {
     $query = "SELECT * FROM bill WHERE id=?";
@@ -21,6 +34,7 @@ class billModel extends Model
       return ['status' => false, 'value' => ''];
     }
   }
+
 
   public function billsForMember(int $person_id): array
   {
@@ -79,6 +93,23 @@ class billModel extends Model
   {
     $query = "DELETE FROM bill WHERE id=?";
     $data = [
+      ['type' => 'i', 'value' => $bill_id],
+    ];
+
+    $status = $this->exeQuery($query, $data, false);
+
+    if ($status) {
+      return ['status' => true, 'value' => ""];
+    } else {
+      return ['status' => false, 'value' => ""];
+    }
+  }
+
+  public function updateAccountingId($bill_id, $accounting_id)
+  {
+    $query = "UPDATE bill SET accounting_id=? WHERE id=?";
+    $data = [
+      ['type' => 'i', 'value' => $accounting_id],
       ['type' => 'i', 'value' => $bill_id],
     ];
 

@@ -196,6 +196,27 @@ class Router
                 'action' => 'delete',
                 'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/index'],
             ],
+            'accounting for a building unit' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/accounting\/\d{1,10}$/',
+                'controller' => 'accountingController',
+                'action' => 'building_unit_accounting',
+                'middleware' => ['Policy:is_not_login:auth/login', 'Policy:not_manager:dashboard/accounting'],
+            ],
+            'show accounting' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/accounting/',
+                'controller' => 'accountingController',
+                'action' => 'index',
+                'middleware' => ['Policy:is_not_login:auth/login'],
+            ],
+            'update accounting' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/dashboard\/update_accounting$/',
+                'controller' => 'accountingController',
+                'action' => 'update_accounting',
+                'middleware' => ['Policy:is_not_login:auth/login'],
+            ],
             'main_page' => [
                 'type' => "GET",
                 'pattern_url' => '/\/$/',
@@ -229,7 +250,7 @@ class Router
                 $params = (array) explode('/', $matches[0]);
                 if (isset($params[3]))
                     $params = (array) explode('/', $matches[0])[3];
-                require 'app/controllers/' . $route['controller'] . '.php';
+                require_once 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
                 call_user_func_array([$object, $route['action']], $params);
                 $page_found = true;

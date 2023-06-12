@@ -28,6 +28,8 @@
     $this->view('dashboard/buildingList', $data);
   } elseif ($_GET['url'] === 'dashboard/bills') {
     $this->view('dashboard/bills', $data);
+  } elseif ($_GET['url'] === 'dashboard/accounting') {
+    $this->view('dashboard/buildingUnitListsAccounting', $data);
   } elseif (explode('/', ($_GET['url']))[2]) {
     $param = explode('/', $_GET['url'])[2];
     if ($_GET['url'] === 'dashboard/building_units_list/' . $param) {
@@ -40,6 +42,8 @@
       $this->view('dashboard/editBill', $data);
     } else if ($_GET['url'] === 'dashboard/create_bill_for_all/' . $param) {
       $this->view('dashboard/createBillForAll', $data);
+    } else if ($_GET['url'] === 'dashboard/accounting/' . $param) {
+      $this->view('dashboard/buildingUnitAccounting', $data);
     }
   } ?>
 </main>

@@ -50,6 +50,12 @@
       </li>
     <?php } ?>
 
+    <li class="nav-item">
+      <a class="nav-link <?php echo ($_GET['url'] === 'dashboard/accounting') ? '' : 'collapsed' ?>"
+        href="<?php echo URL ?>dashboard/accounting">
+        <i class="ri-money-dollar-circle-line mx-2" style="font-size:21px;"></i><span>حسابرسی</span>
+      </a>
+    </li>
   </ul>
 
 </aside>
