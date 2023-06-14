@@ -9,7 +9,7 @@ class authController extends Controller
 
     public function register()
     {
-        $this->header('header');
+        $this->header('header', 'ثبت نام');
         $this->view('auth/register');
         $this->footer('footer');
     }
@@ -46,7 +46,7 @@ class authController extends Controller
 
     public function login(): void
     {
-        $this->header('header');
+        $this->header('header', 'ورود');
         $this->view('auth/login');
         $this->footer('footer');
     }

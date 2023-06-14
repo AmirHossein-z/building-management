@@ -6,7 +6,7 @@
       <span class="d-none d-lg-block m-2">مدیریت ساختمان</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
-  </div><!-- End Logo -->
+  </div>
 
   <nav class="header-nav">
     <ul class="d-flex align-items-center">
@@ -18,7 +18,7 @@
             <?php echo $_SESSION['name'] ?>
           </span>
           <img src="<?php echo URL ?>assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-        </a><!-- End Profile Iamge Icon -->
+        </a>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
@@ -52,9 +52,8 @@
             </a>
           </li>
 
-        </ul><!-- End Profile Dropdown Items -->
-      </li><!-- End Profile Nav -->
-
+        </ul>
+      </li>
     </ul>
-  </nav><!-- End Icons Navigation -->
+  </nav>
 </header>

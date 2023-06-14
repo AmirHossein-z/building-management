@@ -12,7 +12,7 @@ class dashboardController extends Controller
     $person = $this->model('person');
     $data = $person->getAllInfo($_SESSION['id']);
 
-    $this->header('header');
+    $this->header('header', 'داشبورد');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }

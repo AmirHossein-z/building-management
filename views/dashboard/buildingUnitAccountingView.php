@@ -29,7 +29,7 @@
                                     <?php echo $bill['type'] ?>
                             </p>
                             <p>قیمت: <span>
-                                    <?php echo $bill['price'] ?>
+                                    <?php echo $bill['price'] ?> تومان
                             </p>
                             <div class="m-2 d-flex gap-3 justify-content-end align-items-center">
                                 <a href="<?php echo URL ?>dashboard/edit_bill/<?php echo $bill['id'] ?>"

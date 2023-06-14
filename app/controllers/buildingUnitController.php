@@ -24,7 +24,7 @@ class buildingUnitController extends Controller
         'building_info' => []
       ];
     }
-    $this->header('header');
+    $this->header('header', 'واحد شما');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -125,7 +125,7 @@ class buildingUnitController extends Controller
     }
 
 
-    $this->header('header');
+    $this->header('header', 'اطلاعات واحد شما');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -166,7 +166,7 @@ class buildingUnitController extends Controller
       'info' => $result
     ];
 
-    $this->header('header');
+    $this->header('header', 'ویرایش اطلاعات واحد ساختمان');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -218,7 +218,7 @@ class buildingUnitController extends Controller
       ];
     }
 
-    $this->header('header');
+    $this->header('header', 'لیست واحد های ساختمان');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }

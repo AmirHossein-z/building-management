@@ -176,7 +176,7 @@ class accountingController extends Controller
             }
         }
 
-        $this->header('header');
+        $this->header('header', 'حسابرسی');
         $this->view('dashboard/dashboard', $data);
         $this->footer('footer');
 
@@ -298,7 +298,7 @@ class accountingController extends Controller
                 'balance' => 0
             ];
         }
-        $this->header('header');
+        $this->header('header', 'حسابرسی واحد ساختمان');
         $this->view('dashboard/dashboard', $data);
         $this->footer('footer');
     }

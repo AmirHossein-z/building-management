@@ -53,7 +53,7 @@ class buildingController extends Controller
       }
     }
 
-    $this->header('header');
+    $this->header('header', 'اطلاعات ساختمان');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -69,7 +69,7 @@ class buildingController extends Controller
       $data = [
         'role' => $_SESSION['role'],
       ];
-      $this->header('header');
+      $this->header('header', 'ثبت ساختمان');
       $this->view('dashboard/dashboard', $data);
       $this->footer('footer');
     }
@@ -116,7 +116,7 @@ class buildingController extends Controller
       'info' => $result
     ];
 
-    $this->header('header');
+    $this->header('header', 'ویرایش اطلاعات ساختمان');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -195,7 +195,7 @@ class buildingController extends Controller
       }
     }
 
-    $this->header('header');
+    $this->header('header', 'لیست ساختمان ها');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }

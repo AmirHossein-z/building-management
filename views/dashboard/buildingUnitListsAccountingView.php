@@ -71,7 +71,7 @@
                                         <?php echo $bill['type'] ?>
                                     </p>
                                     <p>قیمت: <span>
-                                        <?php echo $bill['price'] ?>
+                                        <?php echo $bill['price'] ?> تومان
                                     </p>
                                 </div>
                             </div>

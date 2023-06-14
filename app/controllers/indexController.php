@@ -9,14 +9,14 @@ class indexController extends Controller
 
     public function main()
     {
-        $this->header('header');
+        $this->header('header', 'صفحه اصلی');
         $this->view('main');
-        $this->header('footer');
+        $this->footer('footer');
     }
 
     public function not_found()
     {
-        $this->header('header');
+        $this->header('header', 'صفحه پیدا نشد');
         $this->view('notFound');
         $this->footer('footer');
     }

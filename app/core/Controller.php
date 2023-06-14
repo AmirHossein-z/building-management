@@ -24,7 +24,7 @@ class Controller
         require_once 'views/' . $path . 'View.php';
     }
 
-    public function header(string $path): void
+    public function header(string $path, string $title): void
     {
         require_once "views/layout/" . $path . "View.php";
     }
@@ -34,21 +34,6 @@ class Controller
         require_once "views/layout/" . $path . "View.php";
     }
 
-    /**
-     * require navbar
-     * @param string $path
-     * @return void
-     */
-    public function navbar(string $path): void
-    {
-        require_once 'views/layout/' . $path . '.php';
-    }
-
-    /**
-     * import DB model
-     * @param string $model_name
-     * @return object
-     */
     public function model(string $model_name): object
     {
         $filename = $model_name . 'Model';

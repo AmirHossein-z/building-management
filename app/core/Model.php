@@ -8,13 +8,6 @@ class Model
         $this->connection = new mysqli('localhost', 'root', '', 'building-mgmt');
     }
 
-    /**
-     * automate execute query to mysql database
-     * @param string $query
-     * @param array $data
-     * @param bool $returnData
-     * @return bool|mysqli_result
-     */
     public function exeQuery(string $query, array $data = [], bool $returnData)
     {
         /*

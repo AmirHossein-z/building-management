@@ -37,7 +37,7 @@ class billController extends Controller
         'id' => ''
       ];
     }
-    $this->header('header');
+    $this->header('header', 'ثبت قبض');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -110,7 +110,7 @@ class billController extends Controller
         'bills' => []
       ];
     }
-    $this->header('header');
+    $this->header('header', 'قبض ها');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -134,7 +134,7 @@ class billController extends Controller
       ];
     }
 
-    $this->header('header');
+    $this->header('header', 'ویرایش قبض');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
@@ -172,7 +172,7 @@ class billController extends Controller
     $data = [
       'building_id' => $building_id,
     ];
-    $this->header('header');
+    $this->header('header', 'ثبت قبض');
     $this->view('dashboard/dashboard', $data);
     $this->footer('footer');
   }
