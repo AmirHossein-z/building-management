@@ -1,7 +1,7 @@
 # building-management (مدیریت ساختمان)
 
 this project is for building management.
-in this app you can define building,select building unit,define bill for every building unit,see financial information about building and it's building units.
+in this app you can define building,select building unit,define bill for every building unit,see financial information about building and it's building units.this app has resource protection for illegal access from normal user
 
 ## Usage
 
@@ -11,7 +11,7 @@ then copy all file project to htdocs directory.
 
 then create a database in phpmyadmin named **building-mgmt** and import database from dababase folder in this project.
 
-then open this [link](http://localhost/building-management) in browser
+then open this [http://localhost/building-management](http://localhost/building-management) in browser
 
 ## Authors
 
@@ -20,6 +20,7 @@ then open this [link](http://localhost/building-management) in browser
 ## Contributing
 
 Contributions are always welcome!
+
 Please set pull request for any recommendations and bugs in my project!
 
 ## Acknowledgements
