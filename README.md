@@ -5,9 +5,9 @@ in this app you can define building,select building unit,define bill for every b
 
 ## Usage
 
-First install xampp first from this [link](https://www.apachefriends.org/).
+First install xampp from this [link](https://www.apachefriends.org/).
 
-then copy all file project to htdocs directory.
+then copy all files from project to htdocs directory.
 
 then create a database in phpmyadmin named **building-mgmt** and import database from dababase folder in this project.
 
